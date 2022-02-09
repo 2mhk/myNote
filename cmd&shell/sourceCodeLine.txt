@@ -1,0 +1,1 @@
+type *.cpp *.c *.h *.hpp *.qml | find /v /c ""
