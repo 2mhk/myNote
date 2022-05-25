@@ -11,3 +11,15 @@
     {
         return false;
     }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    std::ofstream fout(m_fileName, std::ifstream::binary);
+    if (!fout)
+    {
+        return false;
+    }
+    fout << strFileBuffer;
+    fout.close();
