@@ -1,10 +1,8 @@
-    std::ifstream ifile;
-    ifile.open(fileName, std::ifstream::binary);
+    std::ifstream ifile(fileName, std::ifstream::binary);
+    std::string str_read;
     if (ifile)
     {
-        m_fileName = fileName;
-        std::string str_tmp((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
-        m_jsonbuffer = str_tmp;
+        str_read = std::string((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
         ifile.close();
     }
     else
