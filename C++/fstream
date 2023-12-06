@@ -1,23 +1,58 @@
+#include <stdio.h>
+#include <io.h>
+#include <fstream>
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// read file
+inline std::string readFile2String(const std::string& fileName) {
     std::ifstream ifile(fileName, std::ifstream::binary);
-    std::string str_read;
+    std::string str_read = "";
     if (ifile)
     {
         str_read = std::string((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
         ifile.close();
     }
-    else
-    {
-        return false;
-    }
+    return str_read;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    std::ofstream fout(m_fileName, std::ifstream::binary);
-    if (!fout)
+// write file
+inline bool writeString2File(const std::string& fileName, const std::string& strFileBuffer) 
+{
+    std::ofstream fout(fileName, std::ifstream::binary);
+    if (fout)
+    {
+        fout << strFileBuffer;
+        fout.close();
+        return true;
+    }
+    else 
     {
         return false;
     }
-    fout << strFileBuffer;
-    fout.close();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// create floder
+inline bool mkdirMulty(const std::string & directoryPath)
+{
+    std::string tmpDirPath;
+    for (uint32_t i = 0; i < directoryPath.size(); ++i)
+    {
+        tmpDirPath.push_back(directoryPath[i]);
+        if (tmpDirPath[i] == '/' || tmpDirPath[i] == '\\')
+        {
+            if (access(tmpDirPath.c_str(), 0) != 0)
+            {
+                int32_t ret = mkdir(tmpDirPath.c_str());
+                if (ret != 0)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    if (mkdir(tmpDirPath.c_str()) != 0) { return false; }
+    //return (mkdir(tmpDirPath.c_str()) == 0);      //this returns creation of the deepest folder
+    return (access(tmpDirPath.c_str(), 0) == 0);    //this returns availability of the folder
+}
