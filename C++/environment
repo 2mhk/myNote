@@ -16,5 +16,6 @@ libboost_*.lib:
 or all the *.lib:
 ./b2 install --prefix=D:\CppBoost\boost_1_80_0\boost_build --with=all
 
+假设一个库A依赖于库B，我们自己的程序client依赖于库A. 那么，link指的是client->A，runtime-link指的是A -> B
 ---------- boost ----------
 
