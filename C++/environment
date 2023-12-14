@@ -1,0 +1,20 @@
+---------- boost ----------
+
+-preCompiled-exe- https://sourceforge.net/projects/boost/
+-sourceCode-document- https://www.boost.org/
+
+libboost_*.lib 	代表静态链接，运行时exe无需带dll
+boost_*.lib		代表动态链接，运行时exe需带dll
+Boost的-mt-s对应VS的运行时库设置/MT			./libboost_*-mt-s-x64-*.lib
+Boost的-mt-sgd对应VS的运行时库设置/MTd		./libboost_*-mt-sgd-x64-*.lib
+Boost的-mt对应VS的运行时库设置/MD			./libboost_*-mt-x64-*.lib
+Boost的-mt-gd对应VS的运行时库设置/MDd		./libboost_*-mt-gd-x64-*.lib
+
+compile command:
+libboost_*.lib:
+./b2 -link=static runtime-link=shared threading=multi
+or all the *.lib:
+./b2 install --prefix=D:\CppBoost\boost_1_80_0\boost_build --with=all
+
+---------- boost ----------
+

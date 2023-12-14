@@ -1,6 +1,0 @@
-Boost的-mt-s对应VS的运行时库设置/MT
-Boost的-mt-sgd对应VS的运行时库设置/MTd
-Boost的-mt对应VS的运行时库设置/MD
-Boost的-mt-gd对应VS的运行时库设置/MDd
-第一个和第二个可以用以下命令构建./b2 runtime-link=static threading=multi
-第三个和第四个可以用以下命令构建./b2 runtime-link=shared threading=multi
