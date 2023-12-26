@@ -3,7 +3,7 @@
 
 namespace irange_c11 {
     class irange
-    {
+    {        //    for (auto i : irange_c11::irange(0, 10)) { std::cout << i << " "; }    //0 1 2 3 4 5 6 7 8 9
     public:
         class iterator {
         public:
@@ -17,6 +17,7 @@ namespace irange_c11 {
             long value_;
         };
         irange(long begin, long end) : m_begin_value(begin), m_end_value(end) {}
+        irange(long end) : m_begin_value(0), m_end_value(end) {}
         ~irange() {}
         iterator begin() const { return iterator(m_begin_value); }
         iterator end() const { return iterator(m_end_value); }
@@ -25,5 +26,7 @@ namespace irange_c11 {
         long m_end_value;
     };
 }
+
+
 
 #endif
