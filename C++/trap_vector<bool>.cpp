@@ -16,11 +16,6 @@
     }
     {
         std::vector<bool> v(10, false);
-        for (auto&& velem : v) { velem = true; }
-        LOG(INFO) << v;        //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    }
-    {
-        std::vector<bool> v(10, false);
         for (bool velem : v) { velem = true; }
         LOG(INFO) << v;        //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
