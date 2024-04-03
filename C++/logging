@@ -1,0 +1,50 @@
+//spdlog - stream
+//https://github.com/gabime/spdlog/issues/1804
+
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>
+#include <sstream>
+
+class streamable_logger_t {
+    spdlog::level::level_enum log_level_;
+    std::ostringstream log_stream_;
+
+public:
+    explicit streamable_logger_t(const spdlog::level::level_enum log_level)
+        : log_level_(log_level) {
+	    
+    }
+
+    template <typename T>
+    streamable_logger_t& operator<<(const T& value) {
+        log_stream_ << value;
+        return *this;
+    }
+
+    ~streamable_logger_t() {
+        spdlog::log(log_level_, "{}", log_stream_.str());
+    }
+};
+
+/* Might cause macro redefinition errors, you can comment them out if needed */
+// #define INFO info
+// #define WARNING warn
+// #define ERROR err
+
+// loguru
+#define LOG_S(log_level) streamable_logger_t(spdlog::level::log_level)
+
+// glog
+#define LOG(log_level) LOG_S(log_level)
+
+int main() {
+    set_default_logger(spdlog::stdout_color_mt("console"));
+
+    LOG_S(info) << "This is an info message: " << 42;
+    LOG_S(err) << "This is an error message.";
+
+    LOG(info) << "This is an info message: " << 42;
+    LOG(err) << "This is an error message.";
+
+    return EXIT_SUCCESS;
+}
