@@ -25,6 +25,11 @@
         LOG(INFO) << v;        //[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! trap
     {
+        std::vector<bool> v(10, false);
+        for (std::vector<bool>::reference&& velem : v) { velem = true; }
+        LOG(INFO) << v;        //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    }
+    {
         std::vector<int> v(10, false);
         for (auto&& velem : v) { velem = true; }
         LOG(INFO) << v;        //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
