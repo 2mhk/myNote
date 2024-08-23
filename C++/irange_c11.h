@@ -16,8 +16,8 @@ namespace irange_c11 {
         private:
             long value_;
         };
-        irange(long begin, long end) : m_begin_value(begin), m_end_value(end) {}
-        irange(long end) : m_begin_value(0), m_end_value(end) {}
+        irange(long begin, long end) : m_begin_value(begin), m_end_value(end > begin ? end : begin) {}
+        irange(long end) : m_begin_value(0), m_end_value(end > 0 ? end : 0) {}
         ~irange() {}
         iterator begin() const { return iterator(m_begin_value); }
         iterator end() const { return iterator(m_end_value); }
